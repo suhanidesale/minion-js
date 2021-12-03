@@ -10,6 +10,38 @@
 <body>
 
     <h1>Minion Transaltor App</h1>
-    <button></button>
+    <input type="text" class="text-box" id="input"  placeholder="Enter your Name:">
+    <button class="main-submit-btn" id="submit">SUBMIT</button>
+    <div id="output"></div>
+    <script src="app.js"></script>
 </body>
 </html>
+
+<!-- #
+var inputText = document.querySelector("#input-txt");
+var btnSubmit = document.querySelector("#btn-submit");
+var outputText = document.querySelector("#output-txt");*/ -->
+
+<!-- var inputText = document.querySelector("#input-txt");
+var btnSubmit = document.querySelector("#btn-submit");
+var outputText = document.querySelector("#output-txt");
+
+function errorHandler(error){
+    console.log("Error occured", error);
+    alert("Server not responding");
+}
+
+function submitEventHandler(){
+     var input = inputText.value;
+
+     var url = "https://api.funtranslations.com/translate/minion.json"
+     var serverURL = url + "?text=" + input;
+
+     fetch(serverURL)
+     .then(response => response.json())
+     .then(json => {
+         var translatedText = json.contents.translated;
+         outputText.innerText = translatedText;
+     })
+     .catch(errorHandler);
+} -->
