@@ -1,29 +1,28 @@
-var inputtext = document.querySelector("#input");
-var outputtext = document.querySelector("#output");
-var submitbtn = document.querySelector("#submit");
+var txtInput = document.querySelector("#txt-Input");
+var btnConvert = document.querySelector("#btn-Convert");
+var txtOutput = document.querySelector("#txt-Output");
 
+var serverURL = "https://api.funtranslations.com/translate/minion.json";
 
-function errorHandler(error){
-    console.log("Error", error);
-    alert("Server not responding");
+function getTranslationURL(inputText){
+    return serverURL + "?text=" + inputText
 }
 
-function submitbuttonHandler() {
-    
-    var minionurl = "https://api.funtranslations.com/translate/.json";
-    var final_url = minionurl + "?text=" + inputtext.value;
+function errorHandler(error) {
+    console.log("error, bad request", error)
+    alert("No response from server, try again")
+}
 
-    fetch(final_url)
+function clickHandler(){
+    var inputText = txtInput.value;
+
+    fetch(getTranslationURL(inputText))
     .then(response => response.json())
-    .then(json => {
-        var translation = json.contents.translated;
-        outputtext.innerText = translation;
-
+    .then(json =>{
+        var convertedText = json.contents.translated;
+        txtOutput.innerText = convertedText;
     })
+    .catch(errorHandler)
+};
 
-    .catch(errorHandler);
-}
-
-submitbtn.addEventListener("click", submitbuttonHandler);
-
-//var outputText = document.querySelector("#output-txt");
+btnConvert.addEventListener("click", clickHandler);
